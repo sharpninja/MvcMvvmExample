@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MvcMvvmArticle.DataLayer\MvcMvvmArticle.DataLayer.csproj" />
+    <ProjectReference Include="..\MvcMvvmArticle.MVVM\MvcMvvmArticle.MVVM.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
