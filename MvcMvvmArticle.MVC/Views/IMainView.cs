@@ -7,8 +7,7 @@ namespace MvcMvvmArticle.MVC.Views
     {
         ApplicationViewModel ViewModel {get; set;}
 
-        event Func<bool> LoadApplicationViewModel;
-        event Func<Guid, bool> LoadItemModel;
+        event Func<IMainView, bool> LoadApplicationViewModel;
 
         void CallbackMethod<TData>(TData someData);
     }

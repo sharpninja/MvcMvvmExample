@@ -23,10 +23,9 @@ namespace MvcMvvmArticle.WPF
     /// </summary>
     public partial class MainWindow : Window, IMainView
     {
-        private Controller _controller = null;
+        private readonly Controller _controller = null;
 
-        public event Func<bool> LoadApplicationViewModel;
-        public event Func<Guid, bool> LoadItemModel;
+        public event Func<IMainView, bool> LoadApplicationViewModel;
 
         public ApplicationViewModel ViewModel 
         {
@@ -34,8 +33,7 @@ namespace MvcMvvmArticle.WPF
             set => DataContext = value;
         }
 
-        private Guid _viewId = Guid.NewGuid();
-        public Guid ViewID => _viewId;
+        public Guid ViewID { get; } = Guid.NewGuid();
 
         public MainWindow(
             Controller controller
@@ -49,7 +47,7 @@ namespace MvcMvvmArticle.WPF
             ViewModel = viewModel;
 
             Loaded += (s, a) => {
-                if(!(LoadApplicationViewModel?.Invoke() ?? false))
+                if(!(LoadApplicationViewModel?.Invoke(this) ?? false))
                 {
                     MessageBox.Show("Could not load data.");
                 }
@@ -58,7 +56,7 @@ namespace MvcMvvmArticle.WPF
 
         public void CallbackMethod<TData>(TData someData)
         {
-            throw new NotImplementedException();
+            MessageBox.Show($"Received {someData} from controller.");
         }
     }
 }

@@ -4,23 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MvcMvvmArticle.WPF"
-        xmlns:mvvm="clr-namespace:MvcMvvmArticle.MVVM"
+        xmlns:mvvm1="clr-namespace:MvcMvvmArticle.MVVM;assembly=MvcMvvmArticle.MVVM"
         mc:Ignorable="d"
-        d:DataContext="{mvvm:ApplicationViewModel}"
+        d:DataContext="{mvvm1:ApplicationViewModel}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefintion Width="Auto" />
-            <ColumnDefintion Width="*" />
-            <ColumnDefintion Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" />
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding NameSearch}" />
-        <Button Grid.Column="2" Grid.Row="0">Search</Button>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="4" Text="Filter" />
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="4" Text="{Binding Filter, Mode=TwoWay}" />
+        <Button Grid.Column="2" Grid.Row="0" Margin="4" Command="{Binding SearchCommand}" CommandParameter="{Binding}">Search</Button>
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="4" Text="All Names" />
+        <TextBlock Grid.Column="1" Grid.Row="1" Margin="4" Text="Filtered Names" />
+        <ListView Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2" Margin="4" 
+                  ItemsSource="{Binding Names}"></ListView>
+        <ListView Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="4"
+                  ItemsSource="{Binding FilteredNames}"></ListView>
     </Grid>
 </Window>
